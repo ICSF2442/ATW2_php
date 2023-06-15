@@ -16,7 +16,7 @@ class Database
         "port" => 3306,
         "username" => "root",
         "password" => "",
-        "database" => "bdd_Opportunity",
+        "database" => "bdd_atw2",
         "charset" => "utf8"
     );
 

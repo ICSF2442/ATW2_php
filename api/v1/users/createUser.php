@@ -1,9 +1,6 @@
 <?php
 require_once('./../../settings.php');
 
-use Cassandra\Date;
-use Functions\Database;
-
 use Functions\Utils;
 use Objects\RequestResponse;
 use Objects\User;
@@ -56,7 +53,6 @@ if($json == null){
             die();
         }
         $user->setBirthday($birthday);
-        $user->setUserNumber();
 
         if (User::find(NULL, $user->getUsername(), NULL, NULL) == 1) {
             $request->setError("Nome de usuário já existe!");
