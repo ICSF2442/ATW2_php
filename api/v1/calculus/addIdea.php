@@ -1,6 +1,4 @@
 <?php
-
-
 require_once('./../../settings.php');
 
 use Functions\Utils;
@@ -22,13 +20,18 @@ if ($json == null) {
     }
 
     if ($ideaTexto != null) {
-
+       if(Idea::find(null,$ideaTexto,null) == 1){
+           $request->setError("Ideia já existe!");
+           $request->setIsError(true);
+           echo($request->response(false));
+           die();
+       }
         $idea = new Idea();
         $idea->setIdea($ideaTexto);
         $idea->store();
         echo($request->setResult($idea->toArray())->response(false));
     } else {
-        $request->setError("O texto da ideia nao pode ser nulo");
+        $request->setError("A ideia nao pode ser nula");
         $request->setIsError(true);
         echo($request->response(false));
     }
