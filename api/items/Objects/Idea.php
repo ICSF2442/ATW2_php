@@ -3,20 +3,20 @@
 namespace Objects;
 use Functions\Database;
 
-class User
+class Idea
 {
     private ?int $id = null;
 
     private ?string $idea = null;
 
-    private ?double $value = null;
+    private ?float $value = null;
 
 
     public function __construct(int $id = null)
     {
         if ($id != null && Database::getConnection() != null) {
             $database = Database::getConnection();
-            $query = $database->query("SELECT * FROM user WHERE id = ".$id);
+            $query = $database->query("SELECT * FROM idea WHERE id = ".$id);
 
             if ($query->num_rows > 0) {
                 $row = $query->fetch_array(MYSQLI_ASSOC);
@@ -74,31 +74,23 @@ class User
     public function remove(): void
     {
         if ($this->id != null){
-            $sql = "DELETE FROM user WHERE id = $this->id";
+            $sql = "DELETE FROM idea WHERE id = $this->id";
             Database::getConnection()->query($sql);
         }
     }
 
     public static function find(int $id = null, string $idea = null, string $value = null): int{
-        $sql = "SELECT id FROM user WHERE 1=1";
+        $sql = "SELECT id FROM idea WHERE 1=1";
         if($id != NULL){
             $sql .= " AND (id = $id)";
         }
-        if($username != NULL){
-            $sql .= " AND (username = '$username')";
+        if($idea != NULL){
+            $sql .= " AND (idea = '$idea')";
         }
-        if($email != NULL){
-            $sql .= " AND (email = '$email')";
+        if($value != NULL){
+            $sql .= " AND (value = '$value')";
         }
-        if($password != NULL){
-            $sql .= " AND (password = '$password')";
-        }
-        if($verification != NULL){
-            $sql .= " AND (verification = '$verification')";
-        }
-        if($user_number != NULL){
-            $sql .= " AND (user_number = $user_number)";
-        }
+
         $query = Database::getConnection()->query($sql);
 
         if ($query->num_rows > 0) {
@@ -111,29 +103,23 @@ class User
     public static function remover(int $id): void
     {
         if ($id != null){
-            $sql = "DELETE FROM user WHERE id = $id";
+            $sql = "DELETE FROM idea WHERE id = $id";
             Database::getConnection()->query($sql);
         }
     }
 
-    public static function search(int $id = null, string $username = null, string $email = null, string $password = null, int $user_number = null): array{
+    public static function search(int $id = null, string $idea = null, string $value = null): array{
         // crias o comando sql principal
-        $sql = "SELECT id FROM USER WHERE 1=1";
+        $sql = "SELECT id FROM IDEA WHERE 1=1";
         // se passar um dado "id" então vai adicionar ao SQL uma parte dinamica: verificar se o id é igual ao id
         if($id != null){
             $sql .= " and (id = $id)";
         }
-        if($username != null){
-            $sql .= " and (username = '$username')";
+        if($idea != null){
+            $sql .= " and (idea = '$idea')";
         }
-        if($email != null){
-            $sql .= " and (email = '$email')";
-        }
-        if($password != null){
-            $sql .= " and (password = '$password')";
-        }
-        if($user_number != null){
-            $sql .= " and (user_number = $user_number)";
+        if($value != null){
+            $sql .= " and (value = '$value')";
         }
         // cria o array de retorno
         $ret = array();
@@ -174,181 +160,17 @@ class User
     /**
      * @return string|null
      */
-    public function getUsername(): ?string
+    public function getIdea(): ?string
     {
-        return $this->username;
-    }
-
-    /**
-     * @param string|null $username
-     */
-    public function setUsername(?string $username): void
-    {
-        $this->username = $username;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    /**
-     * @param string|null $email
-     */
-    public function setEmail(?string $email): void
-    {
-        $this->email = $email;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    /**
-     * @param string|null $password
-     */
-    public function setPassword(?string $password): void
-    {
-        $this->password = $password;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getBirthday(): ?string
-    {
-        return $this->birthday;
-    }
-
-    /**
-     * @param string|null $birthday
-     */
-    public function setBirthday(?string $birthday): void
-    {
-        $this->birthday = $birthday;
+        return $this->idea;
     }
 
     /**
      * @return float|null
      */
-    public function getWinrate(): ?float
+    public function getValue(): ?float
     {
-        return $this->winrate;
+        return $this->value;
     }
-
-    /**
-     * @param float|null $winrate
-     */
-    public function setWinrate(?float $winrate): void
-    {
-        $this->winrate = $winrate;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getDev(): ?int
-    {
-        return $this->dev;
-    }
-
-    /**
-     * @param int|null $dev
-     */
-    public function setDev(?int $dev): void
-    {
-        $this->dev = $dev;
-    }
-
-    /**
-     * @return Blob|null
-     */
-    public function getImage(): ?Blob
-    {
-        return $this->image;
-    }
-
-    /**
-     * @param Blob|null $image
-     */
-    public function setImage(?Blob $image): void
-    {
-        $this->image = $image;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getTeam(): ?int
-    {
-        return $this->team;
-    }
-
-    /**
-     * @param int|null $team
-     */
-    public function setTeam(?int $team): void
-    {
-        $this->team = $team;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getStatus(): ?int
-    {
-        return $this->status;
-    }
-
-    /**
-     * @param int|null $status
-     */
-    public function setStatus(?int $status): void
-    {
-        $this->status = $status;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getRole(): ?int
-    {
-        return $this->role;
-    }
-
-    /**
-     * @param int|null $role
-     */
-    public function setRole(?int $role): void
-    {
-        $this->role = $role;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getVerification(): ?int
-    {
-        return $this->verification;
-    }
-
-    /**
-     * @param int|null $verification
-     */
-    public function setVerification(?int $verification): void
-    {
-        $this->verification = $verification;
-    }
-
-    /**
-     * @return int|null
-     */
 
 }

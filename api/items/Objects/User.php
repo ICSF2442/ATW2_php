@@ -88,7 +88,7 @@ class User
         }
     }
 
-    public static function find(int $id = null, string $username = null, string $email = null, string $password = null, int $verification = null, int $user_number = null): int{
+    public static function find(int $id = null, string $username = null, string $email = null, string $password = null): int{
         $sql = "SELECT id FROM user WHERE 1=1";
         if($id != NULL){
             $sql .= " AND (id = $id)";
@@ -101,12 +101,6 @@ class User
         }
         if($password != NULL){
             $sql .= " AND (password = '$password')";
-        }
-        if($verification != NULL){
-            $sql .= " AND (verification = '$verification')";
-        }
-        if($user_number != NULL){
-            $sql .= " AND (user_number = $user_number)";
         }
         $query = Database::getConnection()->query($sql);
 
@@ -125,7 +119,7 @@ class User
         }
     }
 
-    public static function search(int $id = null, string $username = null, string $email = null, string $password = null, int $user_number = null): array{
+    public static function search(int $id = null, string $username = null, string $email = null, string $password = null): array{
         // crias o comando sql principal
         $sql = "SELECT id FROM USER WHERE 1=1";
         // se passar um dado "id" então vai adicionar ao SQL uma parte dinamica: verificar se o id é igual ao id
@@ -140,9 +134,6 @@ class User
         }
         if($password != null){
             $sql .= " and (password = '$password')";
-        }
-        if($user_number != null){
-            $sql .= " and (user_number = $user_number)";
         }
         // cria o array de retorno
         $ret = array();
