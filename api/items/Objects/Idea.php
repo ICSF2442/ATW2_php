@@ -32,6 +32,12 @@ class Idea
             "value"=> $this->value);
     }
 
+    public function addCandidate(int $candidateId): void{
+        if($candidateId != null){
+            $sql = "INSERT INTO candidate_idea (idea_FK, candidate_FK) VALUES ('$this->id', '$candidateId')";
+            Database::getConnection()->query($sql);
+        }
+    }
     public function store(): void{
 
         $fields = array("id","idea","value");

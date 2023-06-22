@@ -3,12 +3,14 @@ namespace Objects;
 use Cassandra\Blob;
 use Cassandra\Date;
 use Functions\Database;
+
 class Calculus
 {
     private ?int $id;
 
     private ?date $date;
 
+    private ?String $name;
     private ?int $result;
 
     public function __construct(int $id = null)
@@ -182,6 +184,22 @@ class Calculus
     public function setResult(?int $result): void
     {
         $this->result = $result;
+    }
+
+    /**
+     * @return String|null
+     */
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param String|null $name
+     */
+    public function setName(?string $name): void
+    {
+        $this->name = $name;
     }
 
 

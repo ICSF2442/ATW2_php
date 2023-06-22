@@ -17,6 +17,7 @@ if ($json == null) {
 } else {
     $name = null;
     $photo = null;
+    $calculusID = null;
 
     if ($json["name"] != null) {
         $name = $json["name"];
@@ -24,6 +25,10 @@ if ($json == null) {
     if ($json["photo"] != null) {
         $photo = $json["photo"];
     }
+    if ($json["calculus"] != null){
+        $calculusID = $json["calculus"];
+    }
+
 
 
     if ($name != null) {
@@ -42,6 +47,7 @@ if ($json == null) {
         }
 
         $candidate->store();
+        $candidate->addCalculus($calculusID);
         echo($request->setResult($candidate->toArray())->response(false));
 
 

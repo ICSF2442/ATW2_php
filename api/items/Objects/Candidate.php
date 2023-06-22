@@ -30,6 +30,13 @@ class Candidate
             "name"=> $this->name);
     }
 
+    public function addCalculus(int $calculusId): void{
+        if($calculusId != null){
+            $sql = "INSERT INTO calculus_candidate (candidate_FK, calculus_FK) VALUES ('$calculusId', '$this->id')";
+            Database::getConnection()->query($sql);
+        }
+    }
+
     public function store(): void{
 
         $fields = array("id","photo","name");
