@@ -166,11 +166,29 @@ class Idea
     }
 
     /**
+     * @param string|null $idea
+     */
+    public function setIdea(?string $idea): void
+    {
+        $this->idea = $idea;
+    }
+
+    /**
+     * @param float|null $value
+     */
+    public function setValue(?float $value): void
+    {
+        $this->value = $value;
+    }
+
+
+    /**
      * @return float|null
      */
     public function getValue(): ?float
     {
         return $this->value;
     }
+
 
 }
