@@ -15,22 +15,34 @@ if ($json == null) {
 } else {
     $ideaTexto = null;
     $ideaValue = null;
+    $ideaID = null;
+
 
     if ($json["idea"] != null) {
-        $ideaTexto = $json["idea"];
+        $ideaID = $json["idea"];
+    }
+    if ($json["ideaText"] != null) {
+        $ideaTexto = $json["ideaText"];
     }
     if ($json["value"] != null) {
         $ideaValue = $json["value"];
     }
 
-    if ($ideaTexto != null && $ideaValue != null) {
-       $ret[] = Idea::search(null,$ideaTexto,null);
-       $idIdea = $ret[0]["id"];
-       $idea = new Idea();
-       $idea->setId($idIdea);
-       $idea->setValue($ideaValue);
-
+    if ($ideaTexto != null) {
+        $idea = new Idea($ideaID);
+        $idea->setIdea($ideaTexto);
         $idea->store();
+        echo($request->setResult($idea->toArray())->response(false));
+    } else {
+        $request->setError("Erro!");
+        $request->setIsError(true);
+        echo($request->response(false));
+    }
+
+    if ($ideaValue != null) {
+       $idea = new Idea($ideaID);
+       $idea->setValue($ideaValue);
+       $idea->store();
         echo($request->setResult($idea->toArray())->response(false));
     } else {
         $request->setError("Erro!");

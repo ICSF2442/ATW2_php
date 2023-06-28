@@ -16,12 +16,16 @@ if ($json == null) {
 } else {
     $name = null;
     $date = null;
+    $userID = null;
 
     if ($json["name"] != null) {
         $name = $json["idea"];
     }
     if ($json["date"] != null) {
         $date = $json["date"];
+    }
+    if($json["user"] != null){
+        $userID = $json["user"];
     }
 
     if ($name != null && $date != null) {
@@ -30,6 +34,7 @@ if ($json == null) {
         $calculus->setName($name);
         $calculus->setDate($date);
         $calculus->store();
+        $calculus->addUser($userID);
         echo($request->setResult($calculus->toArray())->response(false));
     } else {
         $request->setError("Erro!");

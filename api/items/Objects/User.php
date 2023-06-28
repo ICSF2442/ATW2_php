@@ -152,7 +152,6 @@ class User
 
         // retorno o array com os objetos, caso haja objetos
         return $ret;
-
     }
 
     /**
@@ -236,22 +235,6 @@ class User
     }
 
     /**
-     * @return float|null
-     */
-    public function getWinrate(): ?float
-    {
-        return $this->winrate;
-    }
-
-    /**
-     * @param float|null $winrate
-     */
-    public function setWinrate(?float $winrate): void
-    {
-        $this->winrate = $winrate;
-    }
-
-    /**
      * @return int|null
      */
     public function getDev(): ?int
@@ -266,114 +249,6 @@ class User
     {
         $this->dev = $dev;
     }
-
-    /**
-     * @return Blob|null
-     */
-    public function getImage(): ?Blob
-    {
-        return $this->image;
-    }
-
-    /**
-     * @param Blob|null $image
-     */
-    public function setImage(?Blob $image): void
-    {
-        $this->image = $image;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getTeam(): ?int
-    {
-        return $this->team;
-    }
-
-    /**
-     * @param int|null $team
-     */
-    public function setTeam(?int $team): void
-    {
-        $this->team = $team;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getStatus(): ?int
-    {
-        return $this->status;
-    }
-
-    /**
-     * @param int|null $status
-     */
-    public function setStatus(?int $status): void
-    {
-        $this->status = $status;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getRole(): ?int
-    {
-        return $this->role;
-    }
-
-    /**
-     * @param int|null $role
-     */
-    public function setRole(?int $role): void
-    {
-        $this->role = $role;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getVerification(): ?int
-    {
-        return $this->verification;
-    }
-
-    /**
-     * @param int|null $verification
-     */
-    public function setVerification(?int $verification): void
-    {
-        $this->verification = $verification;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getUserNumber(): ?int
-    {
-        return $this->user_number;
-    }
-
-    /**
-     * @param int|null $user_number
-     */
-    public function setUserNumber(): void
-    {
-
-        $user_number = rand(0, 9999);
-
-        if(User::find(null,null,null,null,null,$user_number)){
-            $this->setUserNumber();
-        }else{
-            $this->user_number = $user_number;
-        }
-
-    }
-
-
-
-
 
 
 }

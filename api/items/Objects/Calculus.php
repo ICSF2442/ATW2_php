@@ -6,12 +6,12 @@ use Functions\Database;
 
 class Calculus
 {
-    private ?int $id;
+    private ?int $id = null;
 
-    private ?date $date;
+    private ?date $date = null;
 
-    private ?String $name;
-    private ?int $result;
+    private ?String $name  = null;
+    private ?int $result  = null;
 
     public function __construct(int $id = null)
     {
@@ -31,6 +31,13 @@ class Calculus
         return array("id" => $this->id,
             "photo" => $this->date,
             "name"=> $this->result);
+    }
+
+    public function addUser(int $userId): void{
+        if($userId != null){
+            $sql = "INSERT INTO calculus_user (user_FK, calculus_FK) VALUES ('$userId', '$this->id')";
+            Database::getConnection()->query($sql);
+        }
     }
 
     public function store(): void{

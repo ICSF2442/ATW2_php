@@ -72,8 +72,6 @@ if($json == null){
         $email = null;
         $password = null;
         $birthday = null;
-        $status = null;
-        $role = null;
         $user = $_SESSION["user"];
         $user->setId($id);
         if ($json["username"] != $_SESSION["user"]->getUsername()) {
@@ -95,14 +93,6 @@ if($json == null){
         }
 
         setters($json, $user);
-        if ($json["status"] != null) {
-            $status = $json["status"];
-            $user->setStatus($status);
-        }
-        if ($json["role"] != null) {
-            $role = $json["role"];
-            $user->setRole($role);
-        }
         if ($dev != 0) {
             $user->setDev($dev);
         } else {
@@ -121,8 +111,6 @@ if($json == null){
         $email = null;
         $password = null;
         $birthday = null;
-        $status = null;
-        $role = null;
         $dev = null;
 
         if ($json["username"] != $user->getUsername()) {

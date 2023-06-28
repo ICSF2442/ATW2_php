@@ -1,4 +1,5 @@
 <?php
+
 require_once('./../../settings.php');
 
 use Functions\Utils;
@@ -19,21 +20,20 @@ if ($json == null) {
     if($json["calculus"] != null){
         $calculusID = $json["calculus"];
     }
+
     if($calculusID != null){
-        $candidatoIdeal = Utils::calcularCandidatoIdeal($calculusID);
 
+        $result = null;
         $calculus = new \Objects\Calculus($calculusID);
+        $candidate =  new \Objects\Candidate($calculus->getResult());
+        $result = $candidate->getName()
 
-        $calculus->setResult($candidatoIdeal->getId());
-
-        $calculus->store();
-
-        echo($request->setResult($calculus->toArray())->response(false));
+        (new RequestResponse())->setResult($result)->response();
 
     }else{
         $request->setError("ERRO!");
         $request->setIsError(true);
         echo($request->response(false));
     }
-
 }
+

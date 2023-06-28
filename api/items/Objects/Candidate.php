@@ -4,11 +4,11 @@ use Cassandra\Blob;
 use Functions\Database;
 class Candidate
 {
-    private ?int $id;
+    private ?int $id = null;
 
-    private ?blob $photo;
+    private ?blob $photo = null;
 
-    private ?String $name;
+    private ?String $name = null;
 
     public function __construct(int $id = null)
     {
@@ -105,6 +105,8 @@ class Candidate
             Database::getConnection()->query($sql);
         }
     }
+
+
 
     public static function search(int $id = null, string $name = null): array{
         // crias o comando sql principal
