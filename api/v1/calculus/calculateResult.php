@@ -28,7 +28,7 @@ if ($json == null) {
 
         $calculus->store();
 
-        echo($request->setResult($calculus->toArray())->response(false));
+        echo($request->setResult($candidatoIdeal->toArray())->response(false));
 
     }else{
         $request->setError("ERRO!");

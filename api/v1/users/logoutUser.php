@@ -6,7 +6,7 @@ use Functions\Utils;
 use Objects\RequestResponse;
 use Objects\User;
 
-$_SESSION["user"] = array();
+unset($_SESSION["user"]);
 
 if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();

@@ -32,7 +32,7 @@ class Candidate
 
     public function addCalculus(int $calculusId): void{
         if($calculusId != null){
-            $sql = "INSERT INTO calculus_candidate (candidate_FK, calculus_FK) VALUES ('$calculusId', '$this->id')";
+            $sql = "INSERT INTO calculus_candidate (candidate_FK, calculus_FK) VALUES ('$this->id', '$calculusId')";
             Database::getConnection()->query($sql);
         }
     }

@@ -30,6 +30,6 @@ if ($json == null) {
     }
     $idea = new Idea($ideaID);
     $idea->addCandidate($candidateID);
-    echo($request->setResult(Utils::obterArrayIdeias($candidateID))->response(false));
+    echo($request->setResult(null)->response(false));
 
 }

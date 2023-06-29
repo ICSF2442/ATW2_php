@@ -15,17 +15,11 @@ if ($json == null) {
 
 } else {
     $name = null;
-    $date = null;
-    $userID = null;
+    $date = date('Y-m-d');
+    $userID = $_SESSION["user"]->getId();
 
     if ($json["name"] != null) {
-        $name = $json["idea"];
-    }
-    if ($json["date"] != null) {
-        $date = $json["date"];
-    }
-    if($json["user"] != null){
-        $userID = $json["user"];
+        $name = $json["name"];
     }
 
     if ($name != null && $date != null) {

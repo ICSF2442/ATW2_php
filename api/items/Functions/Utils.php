@@ -1,5 +1,6 @@
 <?php
 namespace Functions;
+use Objects\Calculus;
 use Objects\Candidate;
 use Objects\Idea;
 
@@ -53,7 +54,7 @@ class Utils{
             $query = Database::getConnection()->query($sql);
             if ($query->num_rows > 0) {
                 while($row = $query->fetch_array(MYSQLI_ASSOC)){
-                    $ret[] = new Idea($row["id"]);
+                    $ret[] = new Idea($row["idea_FK"]);
                 }
             }
         }
@@ -68,7 +69,7 @@ class Utils{
             $query = Database::getConnection()->query($sql);
             if ($query->num_rows > 0) {
                 while($row = $query->fetch_array(MYSQLI_ASSOC)){
-                    $ret[] = new Candidate($row["id"]);
+                    $ret[] = new Candidate($row["candidate_FK"]);
                 }
             }
         }
@@ -78,11 +79,12 @@ class Utils{
     {
         $ret = array();
         if($userID != null){
-            $sql = "SELECT candidate_FK FROM calculus_user WHERE user_FK = '$userID'";
+            $sql = "SELECT calculus_FK FROM calculus_user WHERE user_FK = '$userID'";
             $query = Database::getConnection()->query($sql);
             if ($query->num_rows > 0) {
                 while($row = $query->fetch_array(MYSQLI_ASSOC)){
-                    $ret[] = new Candidate($row["id"]);
+
+                    $ret[] = new Calculus($row["calculus_FK"]);
                 }
             }
         }

@@ -22,7 +22,7 @@ if ($json == null) {
     if ($json["name"] != null) {
         $name = $json["name"];
     }
-    if ($json["photo"] != null) {
+    if (isset($json["photo"])) {
         $photo = $json["photo"];
     }
     if ($json["calculus"] != null){

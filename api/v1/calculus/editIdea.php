@@ -21,7 +21,7 @@ if ($json == null) {
     if ($json["idea"] != null) {
         $ideaID = $json["idea"];
     }
-    if ($json["ideaText"] != null) {
+    if (isset($json["ideaText"])) {
         $ideaTexto = $json["ideaText"];
     }
     if ($json["value"] != null) {

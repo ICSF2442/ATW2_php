@@ -17,8 +17,8 @@ if ($json == null) {
     $candidateID = null;
     $ret = null;
 
-    if ($json["calculus"] != null) {
-        $candidateID = $json["calculus"];
+    if ($json["candidate"] != null) {
+        $candidateID = $json["candidate"];
     }
     if ($candidateID == null) {
         $request->setError("Erro!");
@@ -26,6 +26,8 @@ if ($json == null) {
         echo($request->response(false));
         die();
     }
-    echo($request->setResult(Utils::obterArrayIdeias($candidateID))->response(false));
+    $arr = Utils::obterArrayIdeias($candidateID);
+    foreach($arr as $i) $ret[] = $i->toArray();
+    echo($request->setResult($ret)->response(false));
 
 }

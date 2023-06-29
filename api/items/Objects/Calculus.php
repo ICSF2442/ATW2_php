@@ -1,14 +1,12 @@
 <?php
 namespace Objects;
-use Cassandra\Blob;
-use Cassandra\Date;
 use Functions\Database;
 
 class Calculus
 {
     private ?int $id = null;
 
-    private ?date $date = null;
+    private ?string $date = null;
 
     private ?String $name  = null;
     private ?int $result  = null;
@@ -22,15 +20,17 @@ class Calculus
             if ($query->num_rows > 0) {
                 $row = $query->fetch_array(MYSQLI_ASSOC);
                 $this->id = $row["id"];
-                $this->date = $row["date"];
+                $this->date = ($row["date"]);
+                $this->name = $row["name"];
                 $this->result = $row["result"];
             }
         }
     }
     public function toArray(): array{
         return array("id" => $this->id,
-            "photo" => $this->date,
-            "name"=> $this->result);
+            "date" => $this->date,
+            "name" => $this->name,
+            "result"=> $this->result);
     }
 
     public function addUser(int $userId): void{
@@ -42,7 +42,7 @@ class Calculus
 
     public function store(): void{
 
-        $fields = array("id","date","result");
+        $fields = array("id","date","result", "name");
 
         if ($this->id == null) {
 
@@ -162,17 +162,17 @@ class Calculus
     }
 
     /**
-     * @return Date|null
+     * @return string|null
      */
-    public function getDate(): ?Date
+    public function getDate(): ?string
     {
         return $this->date;
     }
 
     /**
-     * @param Date|null $date
+     * @param string|null $date
      */
-    public function setDate(?Date $date): void
+    public function setDate(?string $date): void
     {
         $this->date = $date;
     }

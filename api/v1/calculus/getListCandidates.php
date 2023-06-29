@@ -26,6 +26,8 @@ if ($json == null) {
         echo($request->response(false));
         die();
     }
-    echo($request->setResult(Utils::obterArrayCanditos($calculusID))->response(false));
+    $arr = Utils::obterArrayCanditos($calculusID);
+    foreach($arr as $i) $ret[] = $i->toArray();
+    echo($request->setResult($ret)->response(false));
 
 }

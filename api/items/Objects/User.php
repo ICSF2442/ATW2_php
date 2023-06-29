@@ -30,7 +30,7 @@ class User
                 $this->username = $row["username"];
                 $this->email = $row["email"];
                 $this->password = $row["password"];
-                $this->birthday = $row["birthday"];
+                $this->birthdate = $row["birthdate"];
                 $this->dev = $row["dev"];
             }
         }
@@ -43,7 +43,7 @@ class User
 
     public function store(): void{
 
-        $fields = array("id","username","email","password","birthday","dev");
+        $fields = array("id","username","email","password","birthdate","dev");
 
         if ($this->id == null) {
 

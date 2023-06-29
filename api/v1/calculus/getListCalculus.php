@@ -9,22 +9,23 @@ use Objects\Idea;
 $request = new RequestResponse();
 
 $json = Utils::getRequestBody();
-if ($json == null) {
-    echo "ERRO! JSON INVALIDO!";
-
-} else {
-    $userID = null;
-    $ret = null;
-
-    if ($json["user"] != null) {
-        $userID = $json["user"];
-    }
+if (isset($_SESSION["user"])) {
+    $userID = $_SESSION["user"]->getId();
     if($userID == null) {
         $request->setError("Erro!");
         $request->setIsError(true);
         echo($request->response(false));
         die();
     }
-    echo($request->setResult(Utils::obterArrayCalculus($userID))->response(false));
+    $arr = Utils::obterArrayCalculus($userID);
+    $ret = array();
+    foreach($arr as $i){
+        $ret[] = $i->toArray();
+    }
+    echo($request->setResult($ret)->response(false));
+} else {
+    $request->setError("Erro! Sessao nao logada");
+    $request->setIsError(true);
+    echo($request->response(false));
 
 }
