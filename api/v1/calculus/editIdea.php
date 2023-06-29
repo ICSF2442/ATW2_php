@@ -33,10 +33,6 @@ if ($json == null) {
         $idea->setIdea($ideaTexto);
         $idea->store();
         echo($request->setResult($idea->toArray())->response(false));
-    } else {
-        $request->setError("Erro!");
-        $request->setIsError(true);
-        echo($request->response(false));
     }
 
     if ($ideaValue != null) {
@@ -44,7 +40,9 @@ if ($json == null) {
        $idea->setValue($ideaValue);
        $idea->store();
         echo($request->setResult($idea->toArray())->response(false));
-    } else {
+    }
+
+    if($ideaTexto == null and $ideaValue == null){
         $request->setError("Erro!");
         $request->setIsError(true);
         echo($request->response(false));

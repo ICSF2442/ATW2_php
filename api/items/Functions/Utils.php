@@ -74,6 +74,20 @@ class Utils{
         }
         return $ret;
     }
+    public static function obterArrayCalculus($userID): array
+    {
+        $ret = array();
+        if($userID != null){
+            $sql = "SELECT candidate_FK FROM calculus_user WHERE user_FK = '$userID'";
+            $query = Database::getConnection()->query($sql);
+            if ($query->num_rows > 0) {
+                while($row = $query->fetch_array(MYSQLI_ASSOC)){
+                    $ret[] = new Candidate($row["id"]);
+                }
+            }
+        }
+        return $ret;
+    }
 }
 
 

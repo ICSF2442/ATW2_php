@@ -16,7 +16,7 @@ if ($json == null) {
 } else {
     $candidateID = null;
     $candidateName = null;
-    $CandidatePhoto= null;
+    $candidatePhoto= null;
 
     if ($json["candidate"] != null) {
         $candidateID = $json["candidate"];
@@ -25,7 +25,7 @@ if ($json == null) {
         $candidateName = $json["candidateName"];
     }
     if ($json["candidatePhoto"] != null) {
-        $CandidatePhoto = $json["candidatePhoto"];
+        $candidatePhoto = $json["candidatePhoto"];
     }
 
     if ($candidateName != null) {
@@ -33,18 +33,17 @@ if ($json == null) {
         $idea->setName($candidateName);
         $idea->store();
         echo($request->setResult($idea->toArray())->response(false));
-    } else {
-        $request->setError("Erro!");
-        $request->setIsError(true);
-        echo($request->response(false));
     }
 
-    if ($CandidatePhoto != null) {
+    if ($candidatePhoto != null) {
         $idea = new \Objects\Candidate($candidateID);
-        $idea->setPhoto($CandidatePhoto);
+        $idea->setPhoto($candidatePhoto);
         $idea->store();
         echo($request->setResult($idea->toArray())->response(false));
-    } else {
+    }
+
+
+    if($candidateName == null and $candidatePhoto == null){
         $request->setError("Erro!");
         $request->setIsError(true);
         echo($request->response(false));
